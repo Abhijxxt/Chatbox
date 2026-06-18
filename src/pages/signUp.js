@@ -11,7 +11,7 @@ export default function SignUp() {
 
     const [success , setSuccess] = useState(false);
     const [error , setError] = useState(false);
-    const [errMsg, setErrMsg] = useStats(null);
+    const [errMsg, setErrMsg] = useState(null);
     
     const [userEmail, setUserEmail] = useState("");
     const [signUp, setSignUp] = useState(true);
@@ -29,7 +29,7 @@ export default function SignUp() {
         })
         .catch((err) => {
             setError(true);
-            setErrMsg(err.message);
+            setErrMsg(err);
             setSuccess(false);
             setEmail("");
             setPassword("");
