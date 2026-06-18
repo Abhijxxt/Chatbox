@@ -11,11 +11,13 @@ export default function SignUp() {
 
     const [success , setSuccess] = useState(false);
     const [error , setError] = useState(false);
-
+    const [errMsg, setErrMsg] = useStats(null);
+    
     const [userEmail, setUserEmail] = useState("");
     const [signUp, setSignUp] = useState(true);
 
     const SignUpFunction = async () => {
+        setErrMsg(null)
         await createUserWithEmailAndPassword(auth, email, password)
         .then((user) => {
             setUserEmail(user.user.email);
@@ -27,6 +29,7 @@ export default function SignUp() {
         })
         .catch((err) => {
             setError(true);
+            setErrMsg(err.message);
             setSuccess(false);
             setEmail("");
             setPassword("");
@@ -63,7 +66,7 @@ export default function SignUp() {
                 </div>
             }
             
-            {error && <h1>Error</h1>}
+            {error && <h1>Error: {errMsg}</h1>}
 
         </div>
     )
